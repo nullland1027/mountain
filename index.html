@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>汪洋引潮 · 固定视角3D物理模拟</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">固定视角 45° · 局部海面</p>
+          <h1>汪洋引潮</h1>
+          <p class="subtitle">
+            牛顿万有引力 + 浅水近似的高度场模拟。保持水体体积守恒，仅展示
+            天体引力导致的潮汐隆起形态。
+          </p>
+        </div>
+        <div class="meta">
+          <div class="meta-item">
+            <span>垂直比例</span>
+            <strong>1×</strong>
+          </div>
+          <div class="meta-item">
+            <span>网格</span>
+            <strong id="gridMeta">32×32</strong>
+          </div>
+        </div>
+      </header>
+
+      <section class="content">
+        <div class="panel stage">
+          <canvas id="scene"></canvas>
+          <div class="legend">
+            <span>横截面水体 · 连续曲面</span>
+            <span class="divider">·</span>
+            <span>拖动旋转 / 滚轮缩放</span>
+          </div>
+        </div>
+
+        <div class="panel controls">
+          <div class="control">
+            <label for="mass">天体质量</label>
+            <input id="mass" type="range" min="20" max="23" step="0.05" value="21.6" />
+            <div class="value" id="massValue"></div>
+          </div>
+          <div class="control">
+            <label for="volume">天体体积</label>
+            <input id="volume" type="range" min="6.0" max="9.0" step="0.02" value="7.6" />
+            <div class="value" id="volumeValue"></div>
+          </div>
+          <div class="control">
+            <label for="height">天体距海平面高度（球体下表面）</label>
+            <input id="height" type="range" min="10" max="800" step="5" value="220" />
+            <div class="value" id="heightValue"></div>
+          </div>
+          <div class="control">
+            <label for="gridSize">网格尺寸</label>
+            <input id="gridSize" type="range" min="16" max="64" step="4" value="32" />
+            <div class="value" id="gridSizeValue"></div>
+          </div>
+          <div class="control">
+            <button id="reset" type="button">重置水面</button>
+          </div>
+          <div class="note">
+            模型使用球体均匀密度假设；当海水进入球体半径内时按球内部引力公式
+            连续过渡。仅显示局部横截面水体，周围边界做吸收处理。
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
